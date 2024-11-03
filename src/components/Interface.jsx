@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 
-const socket = io('http://localhost:54000'); // Connects to backend server
+const socket = io('https://testb-phi.vercel.app'); // Connects to backend server
 
 function ChatInterface({ contact, onBack, lexusId }) {
   const [messages, setMessages] = useState([]);
