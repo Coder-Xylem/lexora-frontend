@@ -43,9 +43,7 @@ function ChatInterface({ contact, onBack, lexusId }) {
   }, [contact, lexusId]);
 
   // Scroll to the bottom whenever messages change
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  
 
   const handleSendMessage = async () => {
     if (newMessage.trim()) {
