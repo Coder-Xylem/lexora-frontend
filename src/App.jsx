@@ -1,33 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Header from './components/Header';
 import Features from './components/Features';
 import SignInSignUp from './components/Sign';
 import ContactList from './components/List';
-// import ChatInterface from './components/Interface';
-
-
-import { useState, useEffect } from 'react';
-// ... (rest of imports)
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  // Check for token on initial load
   useEffect(() => {
-    // Check for token in local storage on component mount
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true); 
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, []); 
+    setIsAuthenticated(Boolean(localStorage.getItem('token')));
+  }, []);
 
-  // Update isAuthenticated when token changes
+  // Update authentication status when token changes
   useEffect(() => {
     const handleStorageChange = () => {
-      const token = localStorage.getItem('token');
-      setIsAuthenticated(Boolean(token)); // Update state based on token
+      setIsAuthenticated(Boolean(localStorage.getItem('token')));
     };
 
     window.addEventListener('storage', handleStorageChange);
@@ -36,16 +24,18 @@ function App() {
 
   return (
     <Router>
-      <Header />
       <Routes>
+        {/* Public Route */}
         <Route path="/" element={<Features />} />
+
+        {/* Authentication Routes */}
         <Route
           path="/login"
-          element={!isAuthenticated ? <SignInSignUp /> : <Navigate to="/contacts" />}
+          element={isAuthenticated ? <Navigate to="/contacts" /> : <SignInSignUp />}
         />
         <Route
           path="/contacts"
-          element={isAuthenticated ? <ContactList /> : <Navigate to="/login" />}
+          element={<ContactList />}
         />
       </Routes>
     </Router>

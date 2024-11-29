@@ -37,7 +37,7 @@ function ContactList() {
         const updatedContacts = [lexoraContact, ...friendsFromDB.filter(contact => contact?.id !== 'lexora')];
         
         setContacts(updatedContacts);
-        localStorage.setItem('contacts', JSON.stringify(updatedContacts));
+        // localStorage.setItem('contacts', JSON.stringify(updatedContacts));
       } catch (error) {
         console.error('Error fetching contacts:', error);
       }
