@@ -16,7 +16,6 @@ function ContactList() {
     return savedContacts;
   });
 
-  // Load username (lexusId) from local storage
   useEffect(() => {
     const lexusId = localStorage.getItem('lexusId');
     if (lexusId) {
@@ -24,7 +23,6 @@ function ContactList() {
     }
   }, []);
 
-  // Fetch contacts from the user's friends list in the database
   useEffect(() => {
     const fetchContacts = async () => {
       try {
@@ -33,23 +31,19 @@ function ContactList() {
         const friendsFromDB = response.data.contacts || [];
         const lexoraContact = { id: 'lexora', lexusId: 'Lexora', lastMessage: 'Secure conversations await you!' };
         
-        // Filter out "Lexora" from friends to avoid duplicates
         const updatedContacts = [lexoraContact, ...friendsFromDB.filter(contact => contact?.id !== 'lexora')];
         
         setContacts(updatedContacts);
-        // localStorage.setItem('contacts', JSON.stringify(updatedContacts));
       } catch (error) {
         console.error('Error fetching contacts:', error);
       }
     };
     
-    // Fetch friends only if username exists
     if (username) {
       fetchContacts();
     }
   }, [username]);
 
-  // Open chat with selected contact
   const handleOpenChat = (contact) => {
     setSelectedContact(contact);
     setIsChatOpen(true);
@@ -67,7 +61,7 @@ function ContactList() {
         }
       );
       
-      const user = response.data;  // Assuming response contains the added friend object
+      const user = response.data;  
       const newContact = { id: user._id, name: user.lexusId, lastMessage: 'Start chatting!' };
 
       setContacts((prevContacts) => {
@@ -85,7 +79,6 @@ function ContactList() {
     <div className="flex flex-col h-screen bg-gray-100">
       {!isChatOpen ? (
         <div className="w-full h-full bg-gray-900 text-white p-4">
-          {/* Welcome message and search bar */}
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold">Welcome, {username} ❤🙌</h2>
             <div className="flex space-x-2">
@@ -102,7 +95,6 @@ function ContactList() {
             </div>
           </div>
 
-          {/* Contacts list */}
           <div className="flex flex-col space-y-2">
             {contacts.map((contact, index) => (
               contact && (

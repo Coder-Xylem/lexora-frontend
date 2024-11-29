@@ -15,10 +15,15 @@ function ChatInterface({ contact, onBack, lexusId }) {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
+    const socket = io('https://testb-phi.vercel.app/', {
+      transports: ['websocket'],
+      withCredentials: true,
+    });
+  
     if (contact && lexusId) {
       const sortedRoomId = [lexusId, contact.lexusId].sort().join('-');
       setRoomId(sortedRoomId);
-
+  
       const fetchMessages = async () => {
         try {
           const { data } = await axios.get(`/chat/${lexusId}/${contact.lexusId}`);
@@ -27,43 +32,37 @@ function ChatInterface({ contact, onBack, lexusId }) {
           console.error('Error fetching messages:', error);
         }
       };
-
+  
       fetchMessages();
-
-      socket.emit('joinRoom', sortedRoomId);
-
-      const handleNewMessage = (message) => {
-        if (message) {
+  
+      socket.emit('joinRoom', { roomId: sortedRoomId, senderId: lexusId, receiverId: contact.lexusId });
+  
+      socket.on('message', (message) => {
+        if (message.senderLexusId !== lexusId) {
           setMessages((prev) => [...prev, message]);
         }
-      };
-
-      socket.on('message', handleNewMessage);
-
+      });
+  
       return () => {
-        socket.off('message', handleNewMessage);
-        socket.emit('leaveRoom', sortedRoomId);
+        socket.emit('leaveRoom', { roomId: sortedRoomId, clientId: lexusId });
+        socket.disconnect();
       };
     }
   }, [contact, lexusId]);
+  
 
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
-
     const messageWithEmoji = emojify(newMessage.trim());
+
     const messageData = {
-      senderLexusId: lexusId,
-      receiverLexusId: contact.lexusId,
+      senderId: lexusId,
+      receiverId: contact.lexusId,
       message: messageWithEmoji,
-      mediaUrl: null,
     };
 
     socket.emit('chatMessage', messageData);
-
-    setMessages((prev) => [
-      ...prev,
-      { senderLexusId: lexusId, message: messageWithEmoji },
-    ]);
+    setMessages((prev) => [...prev, { senderLexusId: lexusId, message: messageWithEmoji }]);
     setNewMessage('');
 
     try {
@@ -76,10 +75,8 @@ function ChatInterface({ contact, onBack, lexusId }) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
   return (
     <div className="flex flex-col w-full h-screen bg-gray-100">
-      {/* Chat Header */}
       <div className="flex items-center p-4 bg-gray-800 text-white">
         <button onClick={onBack} className="mr-4">
           <svg
@@ -102,32 +99,25 @@ function ChatInterface({ contact, onBack, lexusId }) {
         </h2>
       </div>
 
-      {/* Messages Area */}
       <div className="flex-1 p-4 overflow-y-auto mb-20">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`mb-4 ${
-              message.senderLexusId === lexusId
-                ? 'self-end text-right'
-                : 'self-start text-left'
-            }`}
-          >
-            <span
-              className={`inline-block p-3 rounded-lg ${
-                message.senderLexusId === lexusId
-                  ? 'bg-blue-500 text-white'
-                  : 'bg-gray-300 text-black'
-              }`}
-            >
-              {message.message}
-            </span>
-          </div>
-        ))}
+      {messages.map((message, index) => (
+  message?.message?.trim() ? (  
+    <div
+      key={index}
+      className={`mb-4 ${message.senderLexusId === lexusId ? 'self-end text-right' : 'self-start text-left'}`}
+    >
+      <span
+        className={`inline-block p-3 rounded-lg ${message.senderLexusId === lexusId ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}
+      >
+        {message.message}
+      </span>
+    </div>
+  ) : null
+))}
+
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Message Input Area */}
       <div className="p-4 bg-gray-800 flex items-center fixed w-full bottom-0">
         <input
           type="text"

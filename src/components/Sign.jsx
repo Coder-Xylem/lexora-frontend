@@ -5,17 +5,15 @@ import axios from '../axiosConfig';
 function SignInSignUp() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({ lexusId: '', email: '', password: '' });
-  const [message, setMessage] = useState(''); // For success or error messages
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState(''); 
+    const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -28,7 +26,6 @@ function SignInSignUp() {
         setMessage('Signup successful! Please login to continue.');
         setIsSignUp(false);
       } else {
-        // Save token and redirect after successful login
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('lexusId', response.data.lexusId);
         navigate('/contacts');
@@ -38,7 +35,6 @@ function SignInSignUp() {
     }
   };
 
-  // Redirect to contacts page if already logged in
   useEffect(() => {
     if (localStorage.getItem('token')) {
       navigate('/contacts');
@@ -50,7 +46,6 @@ function SignInSignUp() {
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full max-w-md bg-white rounded-lg shadow dark:border md:mt-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            {/* Toggle between Sign In and Sign Up */}
             <div className="flex justify-around mb-4">
               <button
                 onClick={() => setIsSignUp(false)}
@@ -74,7 +69,6 @@ function SignInSignUp() {
             </h1>
             {message && <p className="text-green-500 text-sm">{message}</p>}
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            {/* Form */}
             <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
               {isSignUp && (
                 <div>
