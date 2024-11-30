@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 
-const socket = io('https://testb-phi.vercel.app/', {
+const socket = io('https://testb-phi.vercel.app', {
   transports: ['websocket'],
   withCredentials: true,
 });
@@ -15,7 +15,7 @@ function ChatInterface({ contact, onBack, lexusId }) {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    const socket = io('https://testb-phi.vercel.app/', {
+    const socket = io('https://testb-phi.vercel.app', {
       transports: ['websocket'],
       withCredentials: true,
     });
