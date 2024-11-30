@@ -1,18 +1,24 @@
-import React, { useState, useEffect, useRef } from 'react';
+import  { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
-
+import PropTypes from 'prop-types';
 const socket = io('https://testb-phi.vercel.app', {
   transports: ['websocket'],
   withCredentials: true,
 });
+
 
 function ChatInterface({ contact, onBack, lexusId }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [roomId, setRoomId] = useState(null);
   const messagesEndRef = useRef(null);
+  ChatInterface.propTypes = {
+  contact: PropTypes.object.isRequired,
+  onBack: PropTypes.func.isRequired,
+  lexusId: PropTypes.string.isRequired,
+};
 
   useEffect(() => {
     const socket = io('https://testb-phi.vercel.app', {
