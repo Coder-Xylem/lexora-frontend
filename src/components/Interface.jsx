@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 import PropTypes from 'prop-types';
-const socket = io('http://localhost:54000', {
+const socket = io('https://lexora-backend.vercel.app', {
   transports: ['websocket'],
   withCredentials: true,
 });
