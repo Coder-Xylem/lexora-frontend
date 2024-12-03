@@ -13,6 +13,14 @@ socket.on('connect_error', (err) => {
   console.error('Connection error:', err);
 });
 
+socket.io.on('error', (error) => {
+  console.error('Socket.io error:', error);
+});
+
+socket.on('connect', () => {
+  console.log('Successfully connected to WebSocket');
+});
+
 
 function ChatInterface({ contact, onBack, lexusId }) {
   const [messages, setMessages] = useState([]);
