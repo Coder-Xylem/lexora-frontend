@@ -4,10 +4,11 @@ import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 import PropTypes from 'prop-types';
 
-const socket = io('wss://lexora-backend-lbmv.vercel.app/socket.io', {
+const socket = io('wss://lexora-backend-lbmv.vercel.app', {
   transports: ['websocket', 'polling'],
   withCredentials: true,
 });
+
 
 socket.on('connect_error', (err) => {
   console.error('Connection error:', err);
