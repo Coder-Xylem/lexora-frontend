@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from '../axiosConfig';
+import { Link } from 'react-router-dom';
 
 function SignInSignUp() {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -42,8 +43,11 @@ function SignInSignUp() {
   }, [navigate]);
 
   return (
-    <section className="bg-gray-50 dark:bg-zinc-950">
+    <section className="bg-black h-screen dark:bg-black">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <Link to="/" className="text-sm text-gray-00 hover:text-white">
+              <button className="px-3 py-2 mb-8 text-[18px] bg-slate-600 hover:text-white hover:underline text-gray-300 rounded-md">Home</button>
+      </Link>
         <div className="w-full max-w-md bg-white rounded-lg shadow dark:border md:mt-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <div className="flex justify-around mb-4">

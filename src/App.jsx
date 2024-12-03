@@ -24,10 +24,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Route */}
+      
         <Route path="/" element={<Features />} />
 
-        {/* Authentication Routes */}
+        
         <Route
           path="/login"
           element={isAuthenticated ? <Navigate to="/contacts" /> : <SignInSignUp />}

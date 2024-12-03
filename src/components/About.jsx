@@ -19,7 +19,7 @@ function About() {
     }, []);
   return (
     <>
-        <header className={`text-gray-400 bg-zinc-950 backdrop-blur-lg body-font fixed top-0 w-full z-50 transition-all ${scrolling ? 'bg-opacity-70' : 'bg-opacity-100'}`}>
+        <header className={`text-gray-400 bg-black backdrop-blur-lg body-font fixed top-0 w-full z-50 transition-all ${scrolling ? 'bg-opacity-70' : 'bg-opacity-100'}`}>
         <div className="container mx-auto flex flex-wrap p-[30px] flex-col md:flex-row items-center ">
           <a className="flex title-font font-medium items-center text-white mb-0  md:mb-0 hover:cursor-pointer ">
             <svg
@@ -53,20 +53,7 @@ function About() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white border-0 py-1 px-3 focus:outline-none rounded text-base mt-4 md:mt-0 transition-all">
-              Source Code
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                className="w-4 h-4 ml-1"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
+         
           </a>
         </div>
         <div className="w-full h-[0.5px] bg-gray-600"></div>
@@ -83,14 +70,29 @@ function About() {
               </span><br />
               The Journey Behind the Project
             </h1>
+            
             <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-400 text-opacity-80">
               I embarked on the journey of building Lexora, a secure and efficient chat app, which took me around 15-20 days to bring to life. Every line of code is crafted with care to ensure seamless communication, and the project was developed using the MERN stack combined with WebSockets to ensure real-time messaging functionality.
             </p>
             <div className="flex mt-6 justify-center">
               <div className="w-24 h-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse inline-flex" />
             </div>
+            <button className="inline-flex mt-4 items-center bg-green-600 hover:bg-green-700 text-white border-0 py-1 px-3 rounded transition-all">
+              Source Code
+              <svg
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                className="w-4 h-4 ml-1"
+                viewBox="0 0 24 24"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
           </div>
-
+          
           <div className="flex justify-center mb-8">
             <img
               src="https://avatars.githubusercontent.com/u/177634554?v=4" 

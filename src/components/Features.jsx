@@ -14,18 +14,23 @@ function Features() {
     {
       icon: (
         <svg
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          className="w-10 h-10"
-          viewBox="0 0 24 24"
-        >
-          <circle cx={6} cy={6} r={3} />
-          <circle cx={6} cy={18} r={3} />
-          <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12" />
-        </svg>
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        className="w-10 h-10"
+        viewBox="0 0 24 24"
+      >
+        <path d="M16 12V9a4 4 0 10-8 0v3" /> 
+        <rect x={5} y={12} width={14} height={10} rx={2} ry={2} />
+        <path d="M9 16h6" /> 
+        <path d="M12 19v-3" /> 
+        <path d="M20 7L16 3" /> 
+        <path d="M4 3L8 7" /> 
+      </svg>
+      
       ),
       title: "End-to-End Encryption – Secure Every Word",
       description:
@@ -34,16 +39,24 @@ function Features() {
     {
       icon: (
         <svg
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          className="w-10 h-10"
-          viewBox="0 0 24 24"
-        >
-          <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-        </svg>
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        className="w-10 h-10"
+        viewBox="0 0 24 24"
+      >
+        
+        <path d="M20 17.58A5 5 0 0018 7a7.44 7.44 0 00-14 1.5A4.5 4.5 0 004 19h16" />
+      
+  
+        {/* <path d="M12 14c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" /> */}
+        <path d="M9 14s2-3 6-3 6 3 6 3M3 14s2-3 6-3" />
+      </svg>
+      
+      
       ),
       title: "Seamless Chat Recovery Across Devices",
       description:
@@ -73,7 +86,7 @@ function Features() {
   return (
     <>
       <header
-        className={`text-gray-400 bg-zinc-950 fixed top-0 w-full z-50 transition-all ${
+        className={`text-gray-400 bg-black fixed top-0 w-full z-50 transition-all ${
           scrolling ? "bg-opacity-70 backdrop-blur-lg" : "bg-opacity-100"
         }`}
       >
@@ -86,7 +99,7 @@ function Features() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              className="w-10 h-10 text-white p-2 bg-purple-500 rounded-full"
+              className="w-10 h-10 text-white p-2 mb-2 bg-purple-500 rounded-full"
               viewBox="0 0 24 24"
             >
               <path d="M21 14a2 2 0 0 1-2 2H7l-4 4V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8z" />
@@ -110,20 +123,7 @@ function Features() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <button className="inline-flex items-center bg-green-600 hover:bg-green-700 text-white border-0 py-1 px-3 rounded transition-all">
-              Source Code
-              <svg
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                className="w-4 h-4 ml-1"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
+        
           </a>
         </div>
         <div className="w-full h-[0.5px] bg-gray-600" />
@@ -131,7 +131,7 @@ function Features() {
 
       <div className="pt-[100px] md:pt-[45px]" />
 
-      <section className="text-gray-400 bg-zinc-950 pb-24">
+      <section className="text-gray-400 bg-black pb-24">
         <div className="container px-5 pb-24 pt-16 mx-auto">
           <div className="text-center mb-20">
             <h1 className="sm:text-3xl text-2xl font-medium title-font text-white mb-4">
@@ -159,7 +159,7 @@ function Features() {
                 key={index}
                 className="p-4 md:w-1/3 flex flex-col text-center items-center"
               >
-                <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-gray-800 text-purple-400 mb-5">
+                <div className="w-20 h-20 inline-flex items-center justify-center rounded-full bg-black text-purple-400 mb-5">
                   {feature.icon}
                 </div>
                 <h2 className="text-lg text-white font-medium mb-3">

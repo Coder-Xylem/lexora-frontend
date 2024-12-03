@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FaExclamationCircle } from 'react-icons/fa'; 
 import ChatInterface from './Interface';
 import axios from '../axiosConfig';
 
@@ -32,33 +34,23 @@ function ContactList() {
         
         const updatedContacts = [lexoraContact, ...friendsFromDB.filter(contact => contact?.id !== 'lexora')];
         
-        // Update contacts if there are new friends
-        setContacts((prevContacts) => {
-          // Check if the contacts list has changed
-          if (JSON.stringify(prevContacts) !== JSON.stringify(updatedContacts)) {
-            localStorage.setItem('contacts', JSON.stringify(updatedContacts)); // Save updated contacts in localStorage
-            return updatedContacts;
-          }
-          return prevContacts; // No update if no change
-        });
+        setContacts(updatedContacts);
       } catch (error) {
         console.error('Error fetching contacts:', error);
       }
     };
 
-    // Fetch contacts initially
     if (username) {
       fetchContacts();
     }
 
-    // Set up polling every 2 seconds
+ 
     const intervalId = setInterval(() => {
       if (username) {
         fetchContacts();
       }
-    }, 2000); // Poll every 2 seconds
+    }, 2000); 
 
-    // Cleanup the interval when the component unmounts
     return () => {
       clearInterval(intervalId);
     };
@@ -98,24 +90,40 @@ function ContactList() {
   return (
     <div className="flex flex-col h-screen bg-gray-100">
       {!isChatOpen ? (
-        <div className="w-full h-full bg-gray-900 text-white p-4">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold">Welcome, {username} ❤🙌</h2>
-            <div className="flex space-x-2">
-              <input
-                type="text"
-                placeholder="Search by Lexus ID"
-                className="p-2 rounded-md text-gray-900"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button onClick={handleAddFriend} className="px-4 py-2 bg-green-500 hover:bg-green-400 text-white rounded-md">
-                Add Friend
-              </button>
-            </div>
+        <div className="w-full h-full bg-black text-white p-4 flex flex-col">
+          {/* Home Button, Welcome, and Search */}
+          <div className="flex items-center mb-4 space-x-3 ">
+            {/* Home button before welcome */}
+            <Link to="/" className="text-sm text-gray-00 hover:text-white">
+              <button className="px-3 py-1 bg-purple-500 hover:bg-purple-600 text-gray-900 rounded-md">Home</button>
+            </Link>
+
+      
+            <h2 className="text-xl font-semibold flex items-center space-x-2 md:content-between">
+              <span>Welcome,</span>
+              <span className="font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-pulse">
+                {username}
+              </span>
+              <span>🌹</span>
+            </h2>
           </div>
 
-          <div className="flex flex-col space-y-2">
+          
+          <div className="flex space-x-2 items-center md: mb-4">
+            <input
+              type="text"
+              placeholder="Search Friend 😇"
+              className="px-4 py-3 bg-white rounded-md text-gray-900 w-full sm:w-auto"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button onClick={handleAddFriend} className="px-4 py-1 md:py-4 bg-rose-500 hover:bg-rose-600 text-white rounded-md">
+              Add Friend
+            </button>
+          </div>
+
+          {/*  list */}
+          <div className="flex flex-col space-y-2 flex-1 overflow-auto">
             {contacts.map((contact, index) => (
               contact && (
                 <div
@@ -132,6 +140,15 @@ function ContactList() {
                 </div>
               )
             ))}
+          </div>
+          
+          {/*bottom */}
+          <div className="text-sm text-gray-300 mt-4 flex items-center space-x-2">
+            <FaExclamationCircle className="text-yellow-400" />
+            <p>
+              Do not refresh the page. If you do it accidentally, clear history of the last 15 minutes and then reopen this app.
+              <a href="/" className="text-blue-400 hover:underline ml-1">Click here to reopen</a>
+            </p>
           </div>
         </div>
       ) : (
