@@ -9,6 +9,7 @@ const socket = io('https://lexora-backend.vercel.app', {
 });
 
 
+
 function ChatInterface({ contact, onBack, lexusId }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
