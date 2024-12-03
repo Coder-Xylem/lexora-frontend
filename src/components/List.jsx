@@ -27,21 +27,41 @@ function ContactList() {
     const fetchContacts = async () => {
       try {
         const response = await axios.get(`/user/contacts/${encodeURIComponent(username)}`);
-        
         const friendsFromDB = response.data.contacts || [];
         const lexoraContact = { id: 'lexora', lexusId: 'Lexora', lastMessage: 'Secure conversations await you!' };
         
         const updatedContacts = [lexoraContact, ...friendsFromDB.filter(contact => contact?.id !== 'lexora')];
         
-        setContacts(updatedContacts);
+        // Update contacts if there are new friends
+        setContacts((prevContacts) => {
+          // Check if the contacts list has changed
+          if (JSON.stringify(prevContacts) !== JSON.stringify(updatedContacts)) {
+            localStorage.setItem('contacts', JSON.stringify(updatedContacts)); // Save updated contacts in localStorage
+            return updatedContacts;
+          }
+          return prevContacts; // No update if no change
+        });
       } catch (error) {
         console.error('Error fetching contacts:', error);
       }
     };
-    
+
+    // Fetch contacts initially
     if (username) {
       fetchContacts();
     }
+
+    // Set up polling every 2 seconds
+    const intervalId = setInterval(() => {
+      if (username) {
+        fetchContacts();
+      }
+    }, 2000); // Poll every 2 seconds
+
+    // Cleanup the interval when the component unmounts
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [username]);
 
   const handleOpenChat = (contact) => {
@@ -107,7 +127,7 @@ function ContactList() {
                     {contact.lexusId ? contact.lexusId[0].toUpperCase() : '?'}
                   </div>
                   <div>
-                  <h3 className="text-md font-semibold">{contact.lexusId}</h3>
+                    <h3 className="text-md font-semibold">{contact.lexusId}</h3>
                   </div>
                 </div>
               )
@@ -115,10 +135,10 @@ function ContactList() {
           </div>
         </div>
       ) : (
-<ChatInterface contact={selectedContact} onBack={() => setIsChatOpen(false)} lexusId={username} />
+        <ChatInterface contact={selectedContact} onBack={() => setIsChatOpen(false)} lexusId={username} />
       )}
     </div>
   );
 }
 
-export default ContactList
+export default ContactList;
