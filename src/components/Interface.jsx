@@ -4,9 +4,9 @@ import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 import PropTypes from 'prop-types';
 
-const socket = io('https://lexora-backend-lbmv.vercel.app', {
-  path: '/ws', // Custom path matching backend
+const socket = io('wss://lexora-backend-lbmv.vercel.app', {
   transports: ['websocket', 'polling'],
+  withCredentials: true,
 });
 
 
