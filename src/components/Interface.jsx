@@ -1,36 +1,25 @@
-import  { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 import PropTypes from 'prop-types';
+
 const socket = io('https://lexora-backend-lbmv.vercel.app', {
   transports: ['websocket'],
   withCredentials: true,
 });
-
-
 
 function ChatInterface({ contact, onBack, lexusId }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
   const [roomId, setRoomId] = useState(null);
   const messagesEndRef = useRef(null);
-  ChatInterface.propTypes = {
-  contact: PropTypes.object.isRequired,
-  onBack: PropTypes.func.isRequired,
-  lexusId: PropTypes.string.isRequired,
-};
 
   useEffect(() => {
-    const socket = io('https://lexora-backend-lbmv.vercel.app', {
-      transports: ['websocket'],
-      withCredentials: true,
-    });
-  
     if (contact && lexusId) {
       const sortedRoomId = [lexusId, contact.lexusId].sort().join('-');
       setRoomId(sortedRoomId);
-  
+
       const fetchMessages = async () => {
         try {
           const { data } = await axios.get(`/chat/${lexusId}/${contact.lexusId}`);
@@ -39,24 +28,23 @@ function ChatInterface({ contact, onBack, lexusId }) {
           console.error('Error fetching messages:', error);
         }
       };
-  
+
       fetchMessages();
-  
+
       socket.emit('joinRoom', { roomId: sortedRoomId, senderId: lexusId, receiverId: contact.lexusId });
-  
+
       socket.on('message', (message) => {
         if (message.senderLexusId !== lexusId) {
           setMessages((prev) => [...prev, message]);
         }
       });
-  
+
       return () => {
         socket.emit('leaveRoom', { roomId: sortedRoomId, clientId: lexusId });
-        socket.disconnect();
+        socket.off('message'); // Clean up the listener
       };
     }
   }, [contact, lexusId]);
-  
 
   const handleSendMessage = async () => {
     if (!newMessage.trim()) return;
@@ -82,6 +70,17 @@ function ChatInterface({ contact, onBack, lexusId }) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+ 
+
+
+ChatInterface.propTypes = {
+  contact: PropTypes.object.isRequired,
+  onBack: PropTypes.func.isRequired,
+  lexusId: PropTypes.string.isRequired,
+};
+
+
   return (
     <div className="flex flex-col w-full h-screen bg-gray-100">
       <div className="flex items-center p-4 bg-gray-800 text-white">
