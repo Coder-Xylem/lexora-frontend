@@ -4,7 +4,7 @@ import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 import PropTypes from 'prop-types';
 
-const socket = io('wss://lexora-backend-lbmv.vercel.app/socket.io/', {
+const socket = io('wss://lexora-backend-lbmv.vercel.app/socket.io', {
   transports: ['websocket', 'polling'],
   withCredentials: true,
 });
