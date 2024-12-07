@@ -116,7 +116,7 @@ function About() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Visit My GitHub Profile
+              Visit My GitHub Profile⭐
             </Link>
           </div>
 
