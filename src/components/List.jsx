@@ -146,8 +146,16 @@ function ContactList() {
           <div className="text-sm text-gray-300 mt-4 flex items-center space-x-2">
             <FaExclamationCircle className="text-yellow-400" />
             <p>
-              Do not refresh the page. If you do it accidentally, clear history of the last 15 minutes and then reopen this app.
-              <a href="/" className="text-blue-400 hover:underline ml-1">Click here to reopen</a>
+              Click Here to Sign-Out. 
+              <button
+                onClick={() => {
+                localStorage.clear(); 
+                window.location.href = '/'; 
+                }}
+                 className="text-blue-400 hover:underline ml-1"
+                   >
+                  Signout
+                </button>
             </p>
           </div>
         </div>
