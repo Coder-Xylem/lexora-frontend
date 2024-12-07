@@ -106,7 +106,7 @@ function About() {
           
 
           <div className="flex flex-col text-center mb-10">
-            <h2 className="text-lg font-medium text-white mb-4">Built by Shaikh Abdullah</h2>
+            <h2 className="text-lg font-medium text-white mb-4">Built by Abdullah Shaikh </h2>
             <p className="text-base text-gray-400 mb-4">
               This project was created single-handedly by me, Shaikh Abdullah, with great passion. From planning to execution, every step was meticulously designed to offer a secure and user-friendly experience.
             </p>

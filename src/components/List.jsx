@@ -95,7 +95,7 @@ function ContactList() {
           <div className="flex items-center mb-4 space-x-3 ">
             {/* Home button before welcome */}
             <Link to="/" className="text-sm text-gray-00 hover:text-white">
-              <button className="px-3 py-1 bg-purple-500 hover:bg-purple-600 text-gray-900 rounded-md">Home</button>
+              <button className="px-3 py-1 bg-purple-500 hover:bg-purple-600 text-white rounded-md">Home</button>
             </Link>
 
       
@@ -107,7 +107,7 @@ function ContactList() {
               <span>🌹</span>
             </h2>
           </div>
-
+    
           
           <div className="flex space-x-2 items-center md: mb-4">
             <input
@@ -121,7 +121,7 @@ function ContactList() {
               Add Friend
             </button>
           </div>
-
+           
           {/*  list */}
           <div className="flex flex-col space-y-2 flex-1 overflow-auto">
             {contacts.map((contact, index) => (
@@ -140,13 +140,10 @@ function ContactList() {
                 </div>
               )
             ))}
-          </div>
-          
-          {/*bottom */}
-          <div className="text-sm text-gray-300 mt-4 flex items-center space-x-2">
+                  <div className="text-sm text-gray-300 mt-4 flex items-center space-x-2">
             <FaExclamationCircle className="text-yellow-400" />
             <p>
-              Click Here to Sign-Out. 
+              Click Here to Sign-Out.(Remember your Lexus ID and Password to Sign-in again for secure conversations) 
               <button
                 onClick={() => {
                 localStorage.clear(); 
@@ -158,6 +155,10 @@ function ContactList() {
                 </button>
             </p>
           </div>
+          </div>
+          
+          {/*bottom */}
+        
         </div>
       ) : (
         <ChatInterface contact={selectedContact} onBack={() => setIsChatOpen(false)} lexusId={username} />
