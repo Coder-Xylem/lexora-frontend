@@ -63,6 +63,13 @@ function About() {
       
       <section className="text-gray-400 bg-zinc-950 body-font">
         <div className="container px-5 pb-24 pt-16 mx-auto">
+        <div className="flex justify-center mb-8">
+            <img
+              src="https://avatars.githubusercontent.com/u/177634554?v=4" 
+              alt="Shaikh Abdullah"
+              className="rounded-full border-4 border-purple-500 w-32 h-32 object-cover"
+            />
+          </div>
           <div className="text-center mb-20">
             <h1 className="sm:text-3xl text-2xl font-medium title-font text-white mb-4">
               <span className='text-4xl my-6 md:text-6xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text animate-pulse drop-shadow-xl'>
@@ -77,7 +84,11 @@ function About() {
             <div className="flex mt-6 justify-center">
               <div className="w-24 h-1 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse inline-flex" />
             </div>
-            <button className="inline-flex mt-4 items-center bg-green-600 hover:bg-green-700 text-white border-0 py-1 px-3 rounded transition-all">
+            <button className="inline-flex mt-4 items-center bg-green-600 hover:bg-green-700 text-white border-0 py-1 px-3 rounded transition-all"
+            onClick={() => {
+              window.open('https://github.com/Coder-philosopher/lexora', '_blank');
+            }}
+            >
               Source Code
               <svg
                 fill="none"
@@ -93,13 +104,6 @@ function About() {
             </button>
           </div>
           
-          <div className="flex justify-center mb-8">
-            <img
-              src="https://avatars.githubusercontent.com/u/177634554?v=4" 
-              alt="Shaikh Abdullah"
-              className="rounded-full border-4 border-purple-500 w-32 h-32 object-cover"
-            />
-          </div>
 
           <div className="flex flex-col text-center mb-10">
             <h2 className="text-lg font-medium text-white mb-4">Built by Shaikh Abdullah</h2>
