@@ -39,7 +39,7 @@ function ChatInterface({ contact, onBack, lexusId }) {
           const { data } = await axios.get(`/chat/${lexusId}/${contact.lexusId}`);
           setMessages(data.messages || []);
         } catch (error) {
-          console.error('Error fetching messages:', error);
+          // console.error('Error fetching messages:', error);
         }
       };
 
