@@ -36,7 +36,7 @@ function ContactList() {
         
         setContacts(updatedContacts);
       } catch (error) {
-        console.error('Error fetching contacts:', error);
+        // console.error('Error fetching contacts:', error);
       }
     };
 
