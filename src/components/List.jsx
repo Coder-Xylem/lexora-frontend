@@ -140,7 +140,7 @@ function ContactList() {
                 </div>
               )
             ))}
-                  {/* <div className="text-sm text-gray-300 mt-4 flex items-center space-x-2">
+                  <div className="text-sm text-gray-300 mt-4 flex items-center space-x-2">
             <FaExclamationCircle className="text-yellow-400" />
             <p>
               Click Here to Sign-Out.(Remember your Lexus ID and Password to Sign-in again for secure conversations) 
@@ -154,7 +154,7 @@ function ContactList() {
                   Signout
                 </button>
             </p>
-          </div> */}
+          </div>
           </div>
           
           {/*bottom */}
