@@ -31,15 +31,15 @@ function App() {
         <Route
           path="/login"
           element={isAuthenticated ? <Navigate to="/contacts" /> : <SignInSignUp />}
-        />
+          />
         <Route
           path="/about"
           element={<About />}
-        />
+          />
 
         <Route
           path="/contacts"
-          element={<ContactList />}
+          element={isAuthenticated ? <ContactList to="/contacts" /> : <SignInSignUp />}
         />
       </Routes>
     </Router>
