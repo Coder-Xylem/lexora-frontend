@@ -4,7 +4,7 @@ import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 import PropTypes from 'prop-types';
 
-const socket = io('wss://lexora-backend-0aed.onrender.com', {
+const socket = io('wss://lexora-backend-3mod.onrender.com', {
   transports: ['websocket', 'polling'],
   withCredentials: true,
 });
