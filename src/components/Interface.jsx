@@ -4,7 +4,7 @@ import { emojify } from 'node-emoji';
 import axios from '../axiosConfig';
 import PropTypes from 'prop-types';
 
-const socket = io('wss://lexora-backend-3mod.onrender.com', {
+const socket = io('wss://lexora-backend-0aed.onrender.com', {
   transports: ['websocket', 'polling'],
   withCredentials: true,
 });
@@ -95,44 +95,49 @@ ChatInterface.propTypes = {
 };
 
 
-   return (
+  return (
     <div className="flex flex-col w-full h-screen bg-gray-100">
-      {/* HEADER */}
       <div className="flex items-center p-4 bg-gray-800 text-white">
         <button onClick={onBack} className="mr-4">
-          <svg /* ... */ />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
         </button>
         <h2 className="text-lg font-semibold">
           {contact?.lexusId === 'Lexora' ? 'Your Notes' : `Chat with ${contact?.lexusId}`}
         </h2>
       </div>
 
-      {/* CHAT MESSAGES */}
       <div className="flex-1 p-4 overflow-y-auto mb-20">
-        {messages.map((message, index) =>
-          message?.message?.trim() ? (
-            <div
-              key={index}
-              className={`mb-4 ${
-                message.senderLexusId === lexusId ? 'self-end text-right' : 'self-start text-left'
-              }`}
-            >
-              <span
-                className={`inline-block p-3 rounded-lg ${
-                  message.senderLexusId === lexusId
-                    ? 'bg-blue-500 text-white'
-                    : 'bg-gray-300 text-black'
-                }`}
-              >
-                {message.message}
-              </span>
-            </div>
-          ) : null
-        )}
+      {messages.map((message, index) => (
+  message?.message?.trim() ? (  
+    <div
+      key={index}
+      className={`mb-4 ${message.senderLexusId === lexusId ? 'self-end text-right' : 'self-start text-left'}`}
+    >
+      <span
+        className={`inline-block p-3 rounded-lg ${message.senderLexusId === lexusId ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}
+      >
+        {message.message}
+      </span>
+    </div>
+  ) : null
+))}
+
         <div ref={messagesEndRef} />
       </div>
 
-      {/* MESSAGE INPUT */}
       <div className="p-4 bg-gray-800 flex items-center fixed w-full bottom-0">
         <input
           type="text"
