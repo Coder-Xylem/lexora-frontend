@@ -24,7 +24,6 @@ function SignInSignUp() {
     e.preventDefault();
     setError('');
     setMessage('');
-
     try {
       const endpoint = isSignUp ? '/auth/register' : '/auth/login';
       const response = await axios.post(endpoint, formData);
@@ -87,7 +86,10 @@ function SignInSignUp() {
           <form className="space-y-4" onSubmit={handleSubmit}>
             {isSignUp && (
               <div>
-                <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-700 dark:text-white">
+                <label
+                  htmlFor="email"
+                  className="block mb-1 text-sm font-medium text-gray-700 dark:text-white"
+                >
                   Email
                 </label>
                 <input
@@ -102,7 +104,10 @@ function SignInSignUp() {
               </div>
             )}
             <div>
-              <label htmlFor="lexusId" className="block mb-1 text-sm font-medium text-gray-700 dark:text-white">
+              <label
+                htmlFor="lexusId"
+                className="block mb-1 text-sm font-medium text-gray-700 dark:text-white"
+              >
                 Lexus-ID
               </label>
               <input
@@ -117,7 +122,10 @@ function SignInSignUp() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="block mb-1 text-sm font-medium text-gray-700 dark:text-white">
+              <label
+                htmlFor="password"
+                className="block mb-1 text-sm font-medium text-gray-700 dark:text-white"
+              >
                 Password
               </label>
               <input
